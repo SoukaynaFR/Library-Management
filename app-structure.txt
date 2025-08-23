@@ -1,0 +1,41 @@
+/Library-Management
+│
+├── backend/                     # Partie Node.js + Express + MongoDB
+│   ├── index.js                 # Point d'entrée du serveur
+│   ├── package.json
+│   ├── config/
+│   │   └── db.js                 # Connexion MongoDB
+│   ├── models/
+│   │   └── book.model.js         
+│   ├── routes/
+│   │   └── book.routes.js        # Routes API CRUD
+│   └── controller/
+│   │   │   └── book.controller.js        # Routes API CRUD
+│   └── services/
+│   |   └── book.service.js   
+│   |   └── index.js       
+│   └── middlewares/
+│       └── index.js    
+
+
+
+
+
+│
+├── frontend/
+│   ├── src/app/
+│   │   ├── models/
+│   │   │   └── book.ts
+│   │   ├── services/
+│   │   │   └── book.service.ts
+│   │   ├── components/
+│   │   │   ├── book-list/
+│   │   │   │   ├── book-list.component.ts
+│   │   │   │   ├── book-list.component.html
+│   │   │   ├── book-form/
+│   │   │   │   ├── book-form.component.ts
+│   │   │   │   ├── book-form.component.html
+│   │   ├── app.module.ts
+│   │   └── app.component.ts
+│   └── angular.json
+└── README.md
