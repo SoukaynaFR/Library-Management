@@ -37,8 +37,11 @@ router.get("/:id", validateDbId, (req, res , next) => {
 router.post("/add-book", (req, res) => {
   bookCrud
     .create(req.body)
-    .then((data) => res.status(201).json(data))
-    .catch((err) => next(err));
+        .then(data => {
+      if(data) res.status(201).json(data)
+        else raiseRecord404Error(req,res)
+    })
+    .catch((err) => res.status(500).json({ error: err.message }));
 });
 
 //update a book
@@ -62,3 +65,24 @@ router.delete("/delete-book/:id", validateDbId, (req,res) => {
    .catch(err => next(err))
 })
 module.exports = router;
+
+
+
+// Récupérer tous les livres ou filtrer par query
+exports.getBooks = async (req, res) => {
+  try {
+    const { query } = req.query; // on récupère le paramètre query
+    let filter = {};
+
+    if (query) {
+      // Recherche partielle, insensible à la casse
+      const regex = new RegExp(query, 'i');
+      filter = { $or: [{ title: regex }, { author: regex }] };
+    }
+
+    const books = await Book.find(filter);
+    res.status(200).json(books);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

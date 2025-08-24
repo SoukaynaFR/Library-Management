@@ -1,11 +1,20 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require("cors");
+
 //local imports
 const connectDb = require('./config/db.js')
 const bookRoutes = require('./controllers/book.controller.js')
 
+
 const app = express()
 const { errorHandler } = require('./middlewares/index.js')
+
+// Autoriser toutes les origines (localhost:4200)
+app.use(cors({
+  origin: "http://localhost:4200",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+}));
 
 //Middleware
 app.use(bodyParser.json())
